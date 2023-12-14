@@ -1,0 +1,41 @@
+.TH CLIENT 1 2022-11-26 Linux "User Manuals"
+
+.SH NAME
+\fBclient\fR \- generate transactions (T<n>) that get sent to the server to execute.
+May have lulls between transactions, so they wait (S<n>) for a transaction to happen
+
+.SH SYNOPSIS
+.B client 
+.I port
+.I ip_address
+
+.SH DESCRIPTION
+.B client \-
+It reads commands from stdin, preprocesses them and then sends necessary commands (Transactions) to the server for further processing.
+If a sleep command is read, the client sleeps for the given number of seconds. If a Trans command is read, the client sends it
+to the server. It waits to receive a unique transaction id from the server as response.
+The client logs information about the kind of commands read from stdin, commands sent to server and responses received from server.
+
+.SH FILES
+.TP 
+\fBclient.cpp\fR \- handles client connection and communicaiton to server, and reading user commands from stdin
+.TP 
+\fBclient_logger.cpp\fR \- handles logging of client activities to .log file
+.TP 
+\fBtands.cpp\fR \- contains the Sleep() function called by the client 
+.TP 
+\fButility.cpp\fR \- handles basic operations for smooth working of client
+
+
+.SH EXAMPLES
+.B ./client
+.I 7834
+.I 127.0.0.1
+.RS
+Attempts to connect to a server at 127.0.0.1 on port 7834.
+
+.SH "SEE ALSO"
+server(1)
+
+.SH AUTHOR
+Inioluwa Adeniyi

@@ -1,0 +1,42 @@
+.TH SERVER 1 2022-11-26 Linux "User Manuals"
+
+.SH NAME
+\fBserver\fR \- executes client requests and sends repsonse(s) back to them
+
+.SH SYNOPSIS
+.B server
+.I port
+
+.B
+.SH DESCRIPTION
+\fBserver\fR accepts client connections and processes client requests. The server initializes a socket on \fIport\fR
+and waits for clients to connect.
+It uses system call \fBselect()\fR to handle multiple incoming connections and messages from clients. 
+It reads, processes the message and runs the corresponding transaction. On completion, a unique transaction id is sent
+back to the specific client that sent the request.
+The server also logs the transactions it receives and performs into a log file. It gives a summary of all transactions 
+performed and calculates the number of transactions performed per second.
+
+The server times out after 30 seconds of inactivity and outputs a log file.
+
+.SH FILES
+.TP 
+\fBserver.cpp\fR \- handles server connection and communication to client(s)
+.TP 
+\fBserver_logger.cpp\fR \- handles logging of server activities to .log file
+.TP 
+\fBtands.cpp\fR \- contains the Trans() function called by the server 
+.TP 
+\fButility.cpp\fR \- handles basic operations for smooth working of server
+
+.SH EXAMPLES
+\fBserver\fR \fI7834\fR
+.RS
+Starts the server on port 7834.
+.RE
+
+.SH "SEE ALSO"
+.B client(1)
+
+.SH AUTHOR
+Inioluwa Adeniyi
